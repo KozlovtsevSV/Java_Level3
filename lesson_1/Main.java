@@ -29,7 +29,7 @@ public class Main {
 
         System.out.println("============ ЗАДАНИЕ №3 ============");
 
-        class Box<T> {
+        class Box<T> extends Fruit {
 
             private ArrayList<T> items = new ArrayList<>();
             private float maxWeigh = 12f;
