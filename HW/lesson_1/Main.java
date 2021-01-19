@@ -29,7 +29,7 @@ public class Main {
 
         System.out.println("============ ЗАДАНИЕ №3 ============");
 
-        class Box<T> extends Fruit {
+        class Box<T extends Fruit> {
 
             private ArrayList<T> items = new ArrayList<>();
             private float maxWeigh = 12f;
@@ -115,6 +115,7 @@ public class Main {
                 System.out.println("Коробка полна не возможно добавить фрукт");
             }
         }
+
 
         System.out.println("Вес в коробке №1 до премещения " + box1.getWeightBox());
         System.out.println("Вес в коробке №2 до премещения " + box3.getWeightBox());
