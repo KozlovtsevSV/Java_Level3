@@ -7,6 +7,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
@@ -121,6 +122,8 @@ public class Controller implements Initializable {
         Network.setCallOnAuthenticated(args -> {
             setAuthenticated(true, false);
             nickname = args[0].toString();
+            loadMsgLocalHistory();
+
         });
 
         Network.setCallOnMsgReceived(args -> {
@@ -133,19 +136,55 @@ public class Controller implements Initializable {
                         for (int i = 1; i < tokens.length; i++) {
                             clientsList.getItems().add(tokens[i]);
                         }
+
                     });
                 }
                 else if(msg.startsWith("/renameUser ")) {
                     String[] tokens = msg.split("\\s");
-                    nickname = tokens[1];
-                    this.renameUser = !this.renameUser;
-                    setRename(this.renameUser);
-                    renameButton.setVisible(!this.renameUser);
+                    renameUser(tokens[1]);
+
                 }
 
             } else {
                 textArea.appendText(msg + "\n");
+                addMsgLocalHistory(msg);
             }
         });
     }
+
+    public void addMsgLocalHistory(String msg){
+
+        IOStream.saveMsg(nickname, msg);
+
+    }
+    public void loadMsgLocalHistory(){
+
+        textArea.clear();
+        List<String> listMsg = IOStream.loadMsg(nickname);
+        for (int i = 0; i < listMsg.size() ; i++) {
+            textArea.appendText(listMsg.get(i)+ "\n");
+        }
+
+    }
+
+    public void renameUser(String newName){
+
+        if(!IOStream.renameUser(nickname, newName)){
+            System.out.println("Не удальсь переместить историю сообщений!");
+        }
+        nickname = newName;
+        this.renameUser = !this.renameUser;
+        setRename(this.renameUser);
+        renameButton.setVisible(!this.renameUser);
+
+
+
+//        textArea.clear();
+//        List<String> listMsg = IOStream.loadMsg(nickname);
+//        for (int i = 0; i < listMsg.size() ; i++) {
+//            textArea.appendText(listMsg.get(i)+ "\n");
+//        }
+
+    }
+
 }

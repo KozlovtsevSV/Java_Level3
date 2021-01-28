@@ -34,7 +34,7 @@ public class ClientHandler {
                                 sendMsg("/authok " + nick);
                                 nickname = nick;
                                 server.subscribe(this);
-                                server.restoreMessages(this, tokens[1], tokens[2]);
+                                //server.restoreMessages(this, tokens[1], tokens[2]);
                                 break;
                             }
                         }
