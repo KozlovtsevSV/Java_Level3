@@ -16,8 +16,8 @@
 
     <HBox fx:id="renamePanel">
         <TextField HBox.hgrow="ALWAYS" fx:id="loginRenameField" promptText="Логин" editable="false" />
-        <PasswordField HBox.hgrow="ALWAYS" fx:id="passRenameField" promptText="Пароль" onAction="#clickRenameButton"/>
-        <TextField HBox.hgrow="ALWAYS" fx:id="newLoginField" promptText="новый Логин" />
+        <PasswordField HBox.hgrow="ALWAYS" fx:id="passRenameField" promptText="Пароль" />
+        <TextField HBox.hgrow="ALWAYS" fx:id="newLoginField" promptText="новый Логин" onAction="#sendRename"/>
         <Button HBox.hgrow="ALWAYS" text="Изменить Логин" onAction="#sendRename" />
     </HBox>
 
